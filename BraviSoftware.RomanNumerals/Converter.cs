@@ -9,62 +9,30 @@ namespace BraviSoftware.RomanNumerals
     {
         public static string Convert(int number)
         {
-            var romanCharacters = new Dictionary<int, string> { { 50, "L"}, { 10, "X" }, { 5, "V" } , { 1, "I" } };
-
-            if (romanCharacters.ContainsKey(number))
-                return romanCharacters[number];
-
+            Dictionary<int, string> characters = new Dictionary<int, string> {
+                { 1000, "M"}, 
+                { 900, "CM"}, 
+                { 500, "D"}, 
+                { 400, "CD"}, 
+                { 100, "C"}, 
+                { 90,"XC"}, 
+                { 50, "L" }, 
+                { 40, "XL" }, 
+                { 10, "X" }, 
+                { 9, "IX" },
+                { 5, "V" }, 
+                { 4, "IV" }, 
+                { 1, "I" } 
+            };
             string roman = string.Empty;
-
-            foreach (var pair in romanCharacters)
+            foreach (var pair in characters)
             {
                 while (number >= pair.Key)
                 {
                     roman += pair.Value;
                     number -= pair.Key;
                 }
-                if ((number >= 40 && number < 50)(number == pair.Key-10) && number != 0)
-                {
-                    roman += "X";
-                    roman += pair.Value;
-                    number = 0;
-                }
-                if ((number == pair.Key-1) && number != 0)
-                {
-                    roman += "I";
-                    roman += pair.Value;
-                    number = 0;
-                }
             }
-
-
-            //while (number >= 10)
-            //{
-            //    roman += "X";
-            //    number -= 10;
-            //}
-
-            //if (number >= 9)
-            //{
-            //    return "IX";
-            //}
-
-            //if (number == 4)
-            //{
-            //    return roman + "IV";
-            //}
-
-            //while (number >= 5)
-            //{
-            //    roman += "V";
-            //    number -= 5;
-            //}
-
-            //while (number >= 1)
-            //{
-            //    roman += "I";
-            //    number -= 1;
-            //}
 
             return roman;
         }
